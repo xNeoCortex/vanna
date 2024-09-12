@@ -46,6 +46,23 @@ flowchart
     end
 ```
 
+```mermaid
+flowchart TD
+    A[generate_sql] -->|get_similar_question_sql| B[get_similar_question_sql]
+    A -->|get_related_ddl| C[get_related_ddl]
+    A -->|get_related_documentation| D[get_related_documentation]
+    A -->|get_sql_prompt| E[get_sql_prompt]
+    A -->|submit_prompt| F[submit_prompt]
+    F --> G{LLM Response}
+    G -->|contains intermediate_sql| H[extract_sql]
+    H --> I[run_sql]
+    I --> J{allow_llm_to_see_data}
+    J -->|True| K[get_sql_prompt with intermediate results]
+    K --> L[submit_prompt]
+    L --> M{Final LLM Response}
+    M --> N[extract_sql]
+```
+
 """
 
 import json
