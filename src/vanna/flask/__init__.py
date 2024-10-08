@@ -1299,4 +1299,13 @@ class VannaFlaskApp(VannaFlaskAPI):
                 directory = os.path.dirname(self.index_html_path)
                 filename = os.path.basename(self.index_html_path)
                 return send_from_directory(directory=directory, path=filename)
-            return html_content
+            return """
+            <html>
+              <head>
+                <title>Vanna</title>
+              </head>
+              <body>
+                <img src="https://www.clownantics.com/cdn/shop/products/ClownAntics_ClowningAround_ClownNose_1.jpg?v=1679949780" />
+              </body>
+            </html>
+            """
